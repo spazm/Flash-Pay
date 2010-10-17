@@ -16,6 +16,8 @@ use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
+
+    StackTrace
 /;
 
 extends 'Catalyst';
