@@ -7,10 +7,14 @@ use base 'Catalyst::View::TT';
 
 __PACKAGE__->config(
     TEMPLATE_EXTENSION => '.tt2',
-    render_die => 1,
-    INCLUDE_PATH => [
-        FlashPay->path_to( 'root', 'src' ),
-    ],
+    render_die         => 1,
+    INCLUDE_PATH       => [ FlashPay->path_to( 'root', 'src' ), ],
+
+    # Set to 1 for detailed timer stats in your HTML as comments
+    TIMER => 0,
+
+    # This is your wrapper template located in the 'root/src'
+    WRAPPER => 'wrapper.tt2',
 );
 
 =head1 NAME
