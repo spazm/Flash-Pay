@@ -97,5 +97,11 @@ __PACKAGE__->set_primary_key("user_address_id");
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->belongs_to(
+    'user',
+    'FlashPay::Schema::Result::User',
+    'user_id',
+    { join_type => 'LEFT OUTER' },
+);
+    __PACKAGE__->meta->make_immutable;
 1;

@@ -88,6 +88,31 @@ __PACKAGE__->has_many(
     "FlashPay::Schema::Result::UserActivity",
     { "foreign.user_id" => "self.user_id" },
 );
+__PACKAGE__->has_many(
+    "creditcards",
+    "FlashPay::Schema::Result::Usercreditcard",
+    { "foreign.user_id" => "self.user_id" },
+);
+__PACKAGE__->has_many(
+    "addresses",
+    "FlashPay::Schema::Result::UserAddress",
+    { "foreign.user_id" => "self.user_id" },
+);
+__PACKAGE__->has_many(
+    "contacts",
+    "FlashPay::Schema::Result::UserContact",
+    { "foreign.user_id" => "self.user_id" },
+);
+__PACKAGE__->has_many(
+    "roles",
+    "FlashPay::Schema::Result::UserRole",
+    { "foreign.user_id" => "self.user_id" },
+);
+__PACKAGE__->has_many(
+    "tabs",
+    "FlashPay::Schema::Result::UserTab",
+    { "foreign.user_id" => "self.user_id" },
+);
 __PACKAGE__->many_to_many(businesses => 'user_activity', 'user');
 __PACKAGE__->meta->make_immutable;
 1;
