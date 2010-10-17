@@ -9,7 +9,7 @@ __PACKAGE__->config(
     TEMPLATE_EXTENSION => '.tt2',
     render_die => 1,
     INCLUDE_PATH => [
-        FlashPay->path_to( 'root', 'src' );
+        FlashPay->path_to( 'root', 'src' ),
     ],
 );
 
