@@ -1,0 +1,11 @@
+[% META title = 'Manual Form - Business Create' -%]
+
+<form method="post" action="[% c.uri_for('form_create_do') %]">
+<table>
+  <tr><td>Name:</td><td><input type="text" name="name"></td></tr>
+  <tr><td>Account Name:</td><td><input type="text" name="account_name"></td></tr>
+  <tr><td>Username:</td><td><input type="text" name="username"></td></tr>
+  <tr><td>Password:</td><td><input type="text" name="password"></td></tr>
+</table>
+<input type="submit" name="Submit" value="Submit">
+</form>
