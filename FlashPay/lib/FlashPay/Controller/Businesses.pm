@@ -48,7 +48,7 @@ sub base :Chained('/') :PathPart('businesses') :CaptureArgs(0)
 
 =head2 form_create
 
-Display form to collect information for book to create
+Display form to collect information for business to create
 
 =cut
                         
@@ -66,35 +66,39 @@ Take information from form and add to database
 
 =cut
 
-sub form_create_do :Chained('base') :PathPart('form_create_do') :Args(0) {
-    my ($self, $c) = @_;
+sub form_create_do : Chained('base') : PathPart('form_create_do') : Args(0)
+{
+    my ( $self, $c ) = @_;
 
     # Retrieve the values from the form
-    my $name         = $c->request->params->{name}         || 'N/A';
-    my $account_name = $c->request->params->{account_name} || 'N/A';
-    my $username     = $c->request->params->{username}     || 'N/A';
-    my $password     = $c->request->params->{password}     || 'N/A';
+    my $name           = $c->request->params->{name}           || 'N/A';
+    my $account_number = $c->request->params->{account_number} || 'N/A';
+    my $username       = $c->request->params->{username}       || 'user';
+    my $password       = $c->request->params->{password}       || '';
 
-    # Create the book
+    # Create the business
     my $business = $c->model('DB::Business')->create(
-        {   name         => $name,
-            account_name => $account_name,
-            username     => $username,
-            password     => $password,
+        {   name           => $name,
+            account_number => $account_number,
+            username       => $username,
+            password       => $password,
         }
     );
+
     # Handle relationship with author
-    # $book->add_to_book_authors({author_id => $author_id});
+    # $business->add_to_book_authors({author_id => $author_id});
     # Note: Above is a shortcut for this:
-    # $book->create_related('book_authors', {author_id => $author_id});
+    # $business->create_related('book_authors', {author_id => $author_id});
 
     # Avoid Data::Dumper issue mentioned earlier
     # You can probably omit this
     $Data::Dumper::Useperl = 1;
 
     # Store new model object in stash and set template
-    $c->stash(business     => $business,
-              template => 'books/create_done.tt2');
+    $c->stash(
+        business => $business,
+        template => 'businesses/create_done.tt2'
+    );
 }
 
 =head2 list
