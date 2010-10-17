@@ -83,5 +83,11 @@ __PACKAGE__->set_primary_key("user_id");
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+__PACKAGE__->has_many(
+    "user_activity",
+    "FlashPay::Schema::Result::UserActivity",
+    { "foreign.user_id" => "self.user_id" },
+);
+__PACKAGE__->many_to_many(businesses => 'user_activity', 'user');
 __PACKAGE__->meta->make_immutable;
 1;
