@@ -1,0 +1,27 @@
+
+
+[% # This is a TT comment.  The '-' at the end "chomps" the newline.  You won't -%]
+[% # see this "chomping" in your browser because HTML ignores blank lines, but  -%]
+[% # it WILL eliminate a blank line if you view the HTML source.  It's purely   -%]
+[%- # optional, but both the beginning and the ending TT tags support chomping. -%]
+
+[% # Provide a title -%]
+[% META title = 'Business List' -%]
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Account Number</th>
+    <th>Active?</th>
+</tr>
+[% FOREACH business IN businesses -%]
+  <tr>
+    <td>[% business.id %]</td>
+    <td>[% business.name %]</td>
+    <td>[% business.account_number %]</td>
+    <td>[% business.active %]</td>
+    <td></td>
+  </tr>
+[% END -%]
+</table>
