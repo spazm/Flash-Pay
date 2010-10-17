@@ -101,6 +101,48 @@ sub form_create_do : Chained('base') : PathPart('form_create_do') : Args(0)
     );
 }
 
+
+=head2 object
+
+Fetch the specified book object based on the book ID and store
+it in the stash
+
+=cut
+
+sub object :Chained('base') :PathPart('id') :CaptureArgs(1) {
+    # $id = primary key of business to delete
+    my ($self, $c, $id) = @_;
+
+    # Find the book object and store it in the stash
+    $c->stash(object => $c->stash->{resultset}->find($id));
+
+    # Make sure the lookup was successful.  You would probably
+    # want to do something like this in a real app:
+    #   $c->detach('/error_404') if !$c->stash->{object};
+    die "Book $id not found!" if !$c->stash->{object};
+
+    # Print a message to the debug log
+    $c->log->debug("*** INSIDE OBJECT METHOD for obj id=$id ***");
+}
+
+=head2 delete
+
+Delete a Business
+
+=cut
+
+sub delete :Chained('object') :PathPart('delete') :Args(0) {
+    my ($self, $c) = @_;
+
+    $c->stash->{object}->delete;
+
+    # Set a status message to be displayed at the top of the view
+    $c->stash->{status_msg} = "Business deleted.";
+
+    # Forward to the list action/method in this controller
+    $c->forward('list');
+}
+
 =head2 list
     
 Fetch all business objects and pass to businesses/list.tt2 in stash to be displayed

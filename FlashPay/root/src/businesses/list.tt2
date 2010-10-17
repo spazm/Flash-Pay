@@ -14,13 +14,15 @@
     <th>Name</th>
     <th>Account Number</th>
     <th>Active?</th>
+    <th>Links</th>
 </tr>
 [% FOREACH business IN businesses -%]
   <tr>
-    <td>[% business.id %]</td>
+    <td>[% business.business_id %]</td>
     <td>[% business.name %]</td>
     <td>[% business.account_number %]</td>
     <td>[% business.active %]</td>
+    <td> <a href="[% c.uri_for(c.controller.action_for('delete'), [business.business_id]) %]">Delete</a>
     <td></td>
   </tr>
 [% END -%]
