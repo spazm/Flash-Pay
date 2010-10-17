@@ -27,6 +27,16 @@ sub index :Path :Args(0) {
     $c->response->body('Matched FlashPay::Controller::Site in Site.');
 }
 
+sub test : Local
+{
+    my ( $self, $c ) = @_;
+
+    $c->stash(
+        username => 'John',
+        template => 'site/test.tt'
+    );
+}
+
 
 =head1 AUTHOR
 
